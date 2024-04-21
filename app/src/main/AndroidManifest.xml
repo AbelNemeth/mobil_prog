@@ -16,7 +16,7 @@
         android:label="The Notes App"
         android:roundIcon="@mipmap/ic_launcher_new_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Beadandó"
+        android:theme="@style/Base.Theme.Beadandó"
         tools:targetApi="31">
         <activity
             android:name=".ViewImage"

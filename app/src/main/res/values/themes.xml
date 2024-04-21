@@ -7,9 +7,12 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/dark_gray</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:hint">@color/colorSecondary</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Beadandó" parent="Base.Theme.Beadandó" />
+    <style name="MyEditTextStyle" parent="ThemeOverlay.Material3.TextInputEditText">
+        <!-- Customize your EditText style here -->
+        <item name="android:hint">@color/colorSecondary</item>
+        <!-- Add other EditText attributes as needed -->
+    </style>
 </resources>

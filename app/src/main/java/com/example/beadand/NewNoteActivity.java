@@ -97,13 +97,15 @@ public class NewNoteActivity extends AppCompatActivity
                 {
                     if(note == null)
                     {
-                        Note note = new Note(System.currentTimeMillis(), title.getText().toString(), content.getText().toString());
+                        note = new Note(System.currentTimeMillis(), title.getText().toString(), content.getText().toString());
                     }
                     else if(note.title == null)
                     {
-                        Note note = new Note(System.currentTimeMillis(), title.getText().toString(), content.getText().toString());
+                        note = new Note(System.currentTimeMillis(), title.getText().toString(), content.getText().toString());
                     }
-                    if (calendar != null && calendar.getTimeInMillis() > Calendar.getInstance().getTimeInMillis())
+                    Toast.makeText(NewNoteActivity.this, "time: " + calendar.getTimeInMillis() + " " + System.currentTimeMillis(), Toast.LENGTH_LONG).show();
+
+                    if (calendar != null && calendar.getTimeInMillis() > System.currentTimeMillis())
                     {
                         note.reminder = calendar;
                         createNotification(note);
@@ -183,7 +185,7 @@ public class NewNoteActivity extends AppCompatActivity
             calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
             calendar.set(Calendar.MINUTE, selectedMinute);
 
-            //Toast.makeText(NewNoteActivity.this, "Selected Time: " + calendar.getTime(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewNoteActivity.this, "Selected Time: " + calendar.getTime(), Toast.LENGTH_SHORT).show();
         }, hour, minute, true);
         timePickerDialog.show();
     }
