@@ -67,7 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         {
             holder.reminderText.setText(timeFormat.format(note.reminder.getTime()));
         }
-        if(note.picture != null)
+        if(note.picture != null && note.picture != "")
         {
             Uri uri = Uri.parse(note.picture);
             Glide.with(context)

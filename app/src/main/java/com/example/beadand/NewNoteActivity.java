@@ -18,10 +18,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,13 +72,14 @@ public class NewNoteActivity extends AppCompatActivity
             {
                 calendar = note.reminder;
             }
-            if(note.picture != null)
+            if(note.picture != null && note.picture != "")
             {
                 imageView = findViewById(R.id.imageView);
                 Uri uri = Uri.parse(note.picture);
                 Glide.with(this)
                         .load(uri)
                         .into(imageView);
+                imageView.setVisibility(View.VISIBLE);
                 imageView.requestLayout();
             }
             //remove original version
@@ -103,7 +106,13 @@ public class NewNoteActivity extends AppCompatActivity
                     {
                         note = new Note(System.currentTimeMillis(), title.getText().toString(), content.getText().toString());
                     }
-                    Toast.makeText(NewNoteActivity.this, "time: " + calendar.getTimeInMillis() + " " + System.currentTimeMillis(), Toast.LENGTH_LONG).show();
+                    else
+                    {
+                        note.title = title.getText().toString();
+                        note.content = content.getText().toString();
+                    }
+
+                    //Toast.makeText(NewNoteActivity.this, "time: " + calendar.getTimeInMillis() + " " + System.currentTimeMillis(), Toast.LENGTH_LONG).show();
 
                     if (calendar != null && calendar.getTimeInMillis() > System.currentTimeMillis())
                     {
@@ -146,6 +155,34 @@ public class NewNoteActivity extends AppCompatActivity
         imagePicker = findViewById(R.id.imagePicker);
         imagePicker.setOnClickListener(v -> openImagePicker());
 
+
+        imageView = findViewById(R.id.imageView);
+        imageView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                PopupMenu menu = new PopupMenu(getApplicationContext(),v);
+                menu.getMenu().add("DELETE");
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+                {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item)
+                    {
+                        if (item.getTitle().equals("DELETE"))
+                        {
+                            //delete the note
+                            picture = null;
+                            note.picture = null;
+                            imageView.setVisibility(View.INVISIBLE);
+                        }
+                        return true;
+                    }
+                });
+                menu.show();
+                return true;
+            }
+        });
     }
 
     private void showDatePickerDialog()
