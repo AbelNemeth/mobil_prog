@@ -1,6 +1,8 @@
 package com.example.beadand;
 
 
+import static android.view.View.VISIBLE;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -250,6 +252,7 @@ public class NewNoteActivity extends AppCompatActivity
 
     // Method to open the image picker
     private void openImagePicker() {
+        imageView.setVisibility(VISIBLE);
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         imagePickerActivityResultLauncher.launch(intent);
